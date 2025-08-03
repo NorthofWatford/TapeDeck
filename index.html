@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Video Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      background: #f8f8f8;
+    }
+    #videoSection {
+      display: none;
+      background: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    video {
+      width: 100%;
+      max-width: 800px;
+    }
+    #error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h2>🔒 Protected Video Page</h2>
+<div id="videoSection">
+  <p>✅ Access granted. Enjoy your video:</p>
+  <video controls>
+    <source src="your-video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<div id="error" style="display: none;">
+  ❌ Access denied. Invalid or missing link token.
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const access = params.get("access");
+
+  const validGUID = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; // Replace with your real GUID
+
+  if (access === validGUID) {
+    document.getElementById("videoSection").style.display = "block";
+  } else {
+    document.getElementById("error").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
